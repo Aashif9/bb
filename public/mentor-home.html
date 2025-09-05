@@ -1,0 +1,1256 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor Profile - Leading Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .powered-by {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-left: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .nav-link:hover {
+      opacity: 0.8;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 2rem;
+    }
+
+    .main-content {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .profile-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+    }
+
+    .profile-details h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .verified-badge {
+      background: #4CAF50;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .profile-actions {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: #667eea;
+    }
+
+    .profile-content {
+      padding: 2rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .info-icon {
+      color: #667eea;
+      width: 20px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sidebar-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+    }
+
+    .sidebar-card h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .chat-btn, .call-btn {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 0.5rem;
+    }
+
+    .chat-btn {
+      background: #2196F3;
+      color: white;
+    }
+
+    .chat-btn:hover {
+      background: #1976D2;
+    }
+
+    .call-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .call-btn:hover {
+      background: #388E3C;
+    }
+
+    .availability {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .availability-time {
+      color: #4CAF50;
+      font-weight: 500;
+    }
+
+    .response-time {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    .linkedin-link {
+      color: #0077b5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .linkedin-link:hover {
+      text-decoration: underline;
+    }
+
+    .reviews-section {
+      margin-top: 1rem;
+    }
+
+    .review-item {
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .reviewer-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .reviewer-name {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .rating {
+      color: #ff9800;
+      font-size: 0.8rem;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .logout-btn {
+      background: #f44336;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .logout-btn:hover {
+      background: #d32f2f;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      
+      .profile-info {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .profile-actions {
+        position: static;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-lightbulb"></i>
+        Leading Light
+        <span class="powered-by">by Byte Brigade</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Dashboard</a>
+        <span id="header-username">Loading...</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <div class="profile-header">
+        <div class="profile-actions">
+          <a href="#" class="btn btn-outline">
+            <i class="fas fa-edit"></i> Edit Profile
+          </a>
+          <a href="#" class="btn btn-outline">
+            <i class="fas fa-eye"></i> View Profile
+          </a>
+        </div>
+        
+        <div class="profile-info">
+          <img id="profile-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-avatar">
+          <div class="profile-details">
+            <h1 id="mentor-name">John Doe</h1>
+            <div class="verified-badge">✓ Verified</div>
+          </div>
+        </div>
+        
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-number" id="chats-attended">150</span>
+            <span class="stat-label">Chats Attended</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="calls-attended">75</span>
+            <span class="stat-label">Calls Attended</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <div class="section">
+          <div class="info-grid">
+            <div class="info-item">
+              <i class="fas fa-university info-icon"></i>
+              <span id="mentor-university">University of California, Berkeley</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap info-icon"></i>
+              <span id="mentor-degree">Computer Science</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-calendar info-icon"></i>
+              <span id="mentor-graduation">Graduated 2023</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-star info-icon"></i>
+              <span>CGPA: <span id="mentor-cgpa">3.9</span></span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-briefcase info-icon"></i>
+              <span id="mentor-experience">3 Years of Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>About Me</h3>
+          <p id="mentor-about">Passionate software engineer with a strong background in full-stack development. I love helping students navigate their college journey and prepare for successful careers.</p>
+          <div class="skills" id="mentor-skills">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>My College Review</h3>
+          <p id="college-review">"My time at UC Berkeley was transformative. The Computer Science program is rigorous but incredibly rewarding, preparing me well for a career in tech. The campus life is vibrant, and there are endless opportunities for growth."</p>
+        </div>
+
+        <div class="section">
+          <h3>User Reviews</h3>
+          <div class="reviews-section" id="user-reviews">
+            <div class="review-item">
+              <div class="reviewer-info">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Reviewer" class="reviewer-avatar">
+                <span class="reviewer-name">Jane Smith</span>
+                <span class="rating">★★★★★ 5.0</span>
+              </div>
+              <p class="review-text">"John was incredibly helpful with my college applications. His insights on Berkeley's CS program were invaluable! Highly recommend."</p>
+            </div>
+            <div class="review-item">
+              <div class="reviewer-info">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Reviewer" class="reviewer-avatar">
+                <span class="reviewer-name">Alex Johnson</span>
+                <span class="rating">★★★★★ 5.0</span>
+              </div>
+              <p class="review-text">"Great advice on internships and career paths. John shared practical tips that really made a difference."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Chat Now</h3>
+        <button class="chat-btn">
+          <i class="fas fa-comments"></i> 17+ Chats Completed - Book 2024 - 7 days
+        </button>
+        <h3>Request Call</h3>
+        <button class="call-btn">
+          <i class="fas fa-phone"></i> 7+ Calls Completed - Trusted by 2 Juniors this week
+        </button>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Availability & Contact</h3>
+        <div class="availability">
+          <i class="fas fa-clock"></i> Availability: <span class="availability-time">6-9 PM (Mon-Fri)</span>
+        </div>
+        <div class="response-time">
+          <i class="fas fa-reply"></i> Average Response Time: Replies within 1 hour
+        </div>
+        <div style="margin-top: 1rem;">
+          <a href="#" class="linkedin-link">
+            <i class="fab fa-linkedin"></i> LinkedIn Profile
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Write Review on Leading Light Feedback</h3>
+        <button class="btn chat-btn">Submit Review</button>
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Log Out
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Load mentor data from Supabase or localStorage
+    async function loadMentorData() {
+      try {
+        // Check if user is logged in
+        const { data: { user } } = await db.client.auth.getUser();
+        
+        if (user) {
+          // Get mentor profile from database
+          const mentorProfile = await db.getMentorProfile(user.id);
+          
+          if (mentorProfile.success && mentorProfile.data) {
+            const mentor = mentorProfile.data;
+            
+            // Update UI with mentor data
+            document.getElementById('header-username').textContent = mentor.full_name || 'Mentor';
+            document.getElementById('mentor-name').textContent = mentor.full_name || 'John Doe';
+            document.getElementById('mentor-university').textContent = mentor.college || 'University of California, Berkeley';
+            document.getElementById('mentor-degree').textContent = mentor.branch || 'Computer Science';
+            document.getElementById('mentor-cgpa').textContent = mentor.cgpa || '3.9';
+            document.getElementById('mentor-experience').textContent = `${mentor.experience || 3} Years of Experience`;
+            
+            // Update skills if available
+            if (mentor.skills && mentor.skills.length > 0) {
+              const skillsContainer = document.getElementById('mentor-skills');
+              skillsContainer.innerHTML = '';
+              mentor.skills.forEach(skill => {
+                const skillTag = document.createElement('span');
+                skillTag.className = 'skill-tag';
+                skillTag.textContent = skill;
+                skillsContainer.appendChild(skillTag);
+              });
+            }
+            
+            // Update about section if available
+            if (mentor.about) {
+              document.getElementById('mentor-about').textContent = mentor.about;
+            }
+            
+            // Update college review if available
+            if (mentor.college_review) {
+              document.getElementById('college-review').textContent = mentor.college_review;
+            }
+          }
+        } else {
+          // Redirect to login if not authenticated
+          window.location.href = 'signin.html';
+        }
+      } catch (error) {
+        console.error('Error loading mentor data:', error);
+        // Fallback to localStorage or default values
+        loadFromLocalStorage();
+      }
+    }
+
+    function loadFromLocalStorage() {
+      const mentorData = JSON.parse(localStorage.getItem('mentorData'));
+      if (mentorData) {
+        document.getElementById('header-username').textContent = mentorData.fullName || 'Mentor';
+        document.getElementById('mentor-name').textContent = mentorData.fullName || 'John Doe';
+        document.getElementById('mentor-university').textContent = mentorData.college || 'University of California, Berkeley';
+        document.getElementById('mentor-degree').textContent = mentorData.branch || 'Computer Science';
+        document.getElementById('mentor-cgpa').textContent = mentorData.cgpa || '3.9';
+        document.getElementById('mentor-experience').textContent = `${mentorData.experience || 3} Years of Experience`;
+        
+        if (mentorData.skills && mentorData.skills.length > 0) {
+          const skillsContainer = document.getElementById('mentor-skills');
+          skillsContainer.innerHTML = '';
+          mentorData.skills.forEach(skill => {
+            const skillTag = document.createElement('span');
+            skillTag.className = 'skill-tag';
+            skillTag.textContent = skill;
+            skillsContainer.appendChild(skillTag);
+          });
+        }
+      }
+    }
+
+    async function logout() {
+      try {
+        await db.signOut();
+        localStorage.clear();
+        window.location.href = 'signin.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+        // Fallback logout
+        localStorage.clear();
+        window.location.href = 'signin.html';
+      }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wait for Supabase to initialize
+      setTimeout(loadMentorData, 500);
+    });
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor Profile - Leading Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .powered-by {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-left: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .nav-link:hover {
+      opacity: 0.8;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 2rem;
+    }
+
+    .main-content {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .profile-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+    }
+
+    .profile-details h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .verified-badge {
+      background: #4CAF50;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .profile-actions {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: #667eea;
+    }
+
+    .profile-content {
+      padding: 2rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .info-icon {
+      color: #667eea;
+      width: 20px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sidebar-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+    }
+
+    .sidebar-card h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .chat-btn, .call-btn {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 0.5rem;
+    }
+
+    .chat-btn {
+      background: #2196F3;
+      color: white;
+    }
+
+    .chat-btn:hover {
+      background: #1976D2;
+    }
+
+    .call-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .call-btn:hover {
+      background: #388E3C;
+    }
+
+    .availability {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .availability-time {
+      color: #4CAF50;
+      font-weight: 500;
+    }
+
+    .response-time {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    .linkedin-link {
+      color: #0077b5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .linkedin-link:hover {
+      text-decoration: underline;
+    }
+
+    .reviews-section {
+      margin-top: 1rem;
+    }
+
+    .review-item {
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .reviewer-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .reviewer-name {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .rating {
+      color: #ff9800;
+      font-size: 0.8rem;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .logout-btn {
+      background: #f44336;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .logout-btn:hover {
+      background: #d32f2f;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      
+      .profile-info {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .profile-actions {
+        position: static;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-lightbulb"></i>
+        Leading Light
+        <span class="powered-by">by Byte Brigade</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Dashboard</a>
+        <span id="header-username">Loading...</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <div class="profile-header">
+        <div class="profile-actions">
+          <a href="#" class="btn btn-outline">
+            <i class="fas fa-edit"></i> Edit Profile
+          </a>
+          <a href="#" class="btn btn-outline">
+            <i class="fas fa-eye"></i> View Profile
+          </a>
+        </div>
+        
+        <div class="profile-info">
+          <img id="profile-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-avatar">
+          <div class="profile-details">
+            <h1 id="mentor-name">John Doe</h1>
+            <div class="verified-badge">✓ Verified</div>
+          </div>
+        </div>
+        
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-number" id="chats-attended">150</span>
+            <span class="stat-label">Chats Attended</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="calls-attended">75</span>
+            <span class="stat-label">Calls Attended</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <div class="section">
+          <div class="info-grid">
+            <div class="info-item">
+              <i class="fas fa-university info-icon"></i>
+              <span id="mentor-university">University of California, Berkeley</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap info-icon"></i>
+              <span id="mentor-degree">Computer Science</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-calendar info-icon"></i>
+              <span id="mentor-graduation">Graduated 2023</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-star info-icon"></i>
+              <span>CGPA: <span id="mentor-cgpa">3.9</span></span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-briefcase info-icon"></i>
+              <span id="mentor-experience">3 Years of Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>About Me</h3>
+          <p id="mentor-about">Passionate software engineer with a strong background in full-stack development. I love helping students navigate their college journey and prepare for successful careers.</p>
+          <div class="skills" id="mentor-skills">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>My College Review</h3>
+          <p id="college-review">"My time at UC Berkeley was transformative. The Computer Science program is rigorous but incredibly rewarding, preparing me well for a career in tech. The campus life is vibrant, and there are endless opportunities for growth."</p>
+        </div>
+
+        <div class="section">
+          <h3>User Reviews</h3>
+          <div class="reviews-section" id="user-reviews">
+            <div class="review-item">
+              <div class="reviewer-info">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Reviewer" class="reviewer-avatar">
+                <span class="reviewer-name">Jane Smith</span>
+                <span class="rating">★★★★★ 5.0</span>
+              </div>
+              <p class="review-text">"John was incredibly helpful with my college applications. His insights on Berkeley's CS program were invaluable! Highly recommend."</p>
+            </div>
+            <div class="review-item">
+              <div class="reviewer-info">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Reviewer" class="reviewer-avatar">
+                <span class="reviewer-name">Alex Johnson</span>
+                <span class="rating">★★★★★ 5.0</span>
+              </div>
+              <p class="review-text">"Great advice on internships and career paths. John shared practical tips that really made a difference."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Chat Now</h3>
+        <button class="chat-btn">
+          <i class="fas fa-comments"></i> 17+ Chats Completed - Book 2024 - 7 days
+        </button>
+        <h3>Request Call</h3>
+        <button class="call-btn">
+          <i class="fas fa-phone"></i> 7+ Calls Completed - Trusted by 2 Juniors this week
+        </button>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Availability & Contact</h3>
+        <div class="availability">
+          <i class="fas fa-clock"></i> Availability: <span class="availability-time">6-9 PM (Mon-Fri)</span>
+        </div>
+        <div class="response-time">
+          <i class="fas fa-reply"></i> Average Response Time: Replies within 1 hour
+        </div>
+        <div style="margin-top: 1rem;">
+          <a href="#" class="linkedin-link">
+            <i class="fab fa-linkedin"></i> LinkedIn Profile
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Write Review on Leading Light Feedback</h3>
+        <button class="btn chat-btn">Submit Review</button>
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Log Out
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Load mentor data from Supabase or localStorage
+    async function loadMentorData() {
+      try {
+        // Check if user is logged in
+        const { data: { user } } = await db.client.auth.getUser();
+        
+        if (user) {
+          // Get mentor profile from database
+          const mentorProfile = await db.getMentorProfile(user.id);
+          
+          if (mentorProfile.success && mentorProfile.data) {
+            const mentor = mentorProfile.data;
+            
+            // Update UI with mentor data
+            document.getElementById('header-username').textContent = mentor.full_name || 'Mentor';
+            document.getElementById('mentor-name').textContent = mentor.full_name || 'John Doe';
+            document.getElementById('mentor-university').textContent = mentor.college || 'University of California, Berkeley';
+            document.getElementById('mentor-degree').textContent = mentor.branch || 'Computer Science';
+            document.getElementById('mentor-cgpa').textContent = mentor.cgpa || '3.9';
+            document.getElementById('mentor-experience').textContent = `${mentor.experience || 3} Years of Experience`;
+            
+            // Update skills if available
+            if (mentor.skills && mentor.skills.length > 0) {
+              const skillsContainer = document.getElementById('mentor-skills');
+              skillsContainer.innerHTML = '';
+              mentor.skills.forEach(skill => {
+                const skillTag = document.createElement('span');
+                skillTag.className = 'skill-tag';
+                skillTag.textContent = skill;
+                skillsContainer.appendChild(skillTag);
+              });
+            }
+            
+            // Update about section if available
+            if (mentor.about) {
+              document.getElementById('mentor-about').textContent = mentor.about;
+            }
+            
+            // Update college review if available
+            if (mentor.college_review) {
+              document.getElementById('college-review').textContent = mentor.college_review;
+            }
+          }
+        } else {
+          // Redirect to login if not authenticated
+          window.location.href = 'signin.html';
+        }
+      } catch (error) {
+        console.error('Error loading mentor data:', error);
+        // Fallback to localStorage or default values
+        loadFromLocalStorage();
+      }
+    }
+
+    function loadFromLocalStorage() {
+      const mentorData = JSON.parse(localStorage.getItem('mentorData'));
+      if (mentorData) {
+        document.getElementById('header-username').textContent = mentorData.fullName || 'Mentor';
+        document.getElementById('mentor-name').textContent = mentorData.fullName || 'John Doe';
+        document.getElementById('mentor-university').textContent = mentorData.college || 'University of California, Berkeley';
+        document.getElementById('mentor-degree').textContent = mentorData.branch || 'Computer Science';
+        document.getElementById('mentor-cgpa').textContent = mentorData.cgpa || '3.9';
+        document.getElementById('mentor-experience').textContent = `${mentorData.experience || 3} Years of Experience`;
+        
+        if (mentorData.skills && mentorData.skills.length > 0) {
+          const skillsContainer = document.getElementById('mentor-skills');
+          skillsContainer.innerHTML = '';
+          mentorData.skills.forEach(skill => {
+            const skillTag = document.createElement('span');
+            skillTag.className = 'skill-tag';
+            skillTag.textContent = skill;
+            skillsContainer.appendChild(skillTag);
+          });
+        }
+      }
+    }
+
+    async function logout() {
+      try {
+        await db.signOut();
+        localStorage.clear();
+        window.location.href = 'signin.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+        // Fallback logout
+        localStorage.clear();
+        window.location.href = 'signin.html';
+      }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wait for Supabase to initialize
+      setTimeout(loadMentorData, 500);
+    });
+  </script>
+</body>
+</html>

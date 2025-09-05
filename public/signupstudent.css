@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #667eea, #764ba2); /* Gradient background */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Blur effect behind container */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  form .row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  input,
+  select {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+  }
+  
+  input:focus,
+  select:focus {
+    box-shadow: 0 0 0 2px #a18cd1; /* Soft glow effect */
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    font-weight: 600;
+    background: #00bfa6; /* Teal color */
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #009e8d; /* Darker teal on hover */
+  }
+  
+  button:disabled {
+    background: #b6b3e3; /* Light gray when disabled */
+    cursor: not-allowed;
+  }
+  
+  #statusMsg {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 500;
+  }

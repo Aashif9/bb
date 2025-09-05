@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback & Mentor Call</title>
+  <link rel="stylesheet" href="hell.css" />
+  <script src="hello.js" defer></script>
+</head>
+<style>body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form, .mentor-section {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 2px solid #ffb86c;
+}
+
+textarea {
+  resize: vertical;
+  background-color: #fffbe6;
+}
+
+.rating-options label {
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+input[type="radio"] {
+  accent-color: #ff6b81;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  background: linear-gradient(to right, #ff6a88, #ff99ac);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(255, 106, 136, 0.5);
+}</style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("feedbackForm");
+  const mentorSelect = document.getElementById("mentorSelect");
+  const callMentorBtn = document.getElementById("callMentorBtn");
+
+  // Feedback Form Submission
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = form.elements["name"].value.trim();
+    const email = form.elements["email"].value.trim();
+    const message = form.elements["message"].value.trim();
+    const rating = form.elements["rating"].value;
+
+    // Basic validation
+    if (!name || !email || !message || !rating) {
+      alert("Please complete all fields and select a rating.");
+      return;
+    }
+
+    // Log the feedback
+    console.log("Feedback Submitted:");
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Message:", message);
+    console.log("Rating:", rating);
+
+    alert("Thanks for your feedback, ${name}!");
+    form.reset();
+  });
+
+  // Mentor Call Button
+  callMentorBtn.addEventListener("click", () => {
+    const phoneNumber = mentorSelect.value;
+    if (phoneNumber) {
+      window.location.href = 'tel:${phoneNumber}';
+    } else {
+      alert("Please select a mentor to call.");
+    }
+  });
+});
+</script>
+<body>
+  <form id="feedbackForm">
+    <h2>Feedback Form</h2>
+    <label for="name">Name:</label>
+    <input type="text" name="name" placeholder="Your Name" />
+
+    <label for="email">Email:</label>
+    <input type="text" name="email" placeholder="Your Email" />
+
+    <label for="message">Message:</label>
+    <textarea name="message" rows="4" placeholder="Your message..."></textarea>
+
+    <label>Rating (out of 5):</label>
+    <div class="rating-options">
+      <label><input type="radio" name="rating" value="1" /> 1</label>
+      <label><input type="radio" name="rating" value="2" /> 2</label>
+      <label><input type="radio" name="rating" value="3" /> 3</label>
+      <label><input type="radio" name="rating" value="4" /> 4</label>
+      <label><input type="radio" name="rating" value="5" /> 5</label>
+    </div>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <section class="mentor-section">
+    <h2>Select a Mentor to Call</h2>
+    <select id="mentorSelect">
+      <option value="">-- Choose Mentor --</option>
+      <option value="+917382092277">Ankita Sharma (AI Expert)</option>
+      <option value="+918121866294">neha bala(Web Dev Mentor)</option>
+      <option value="+919876543210">Sneha Patel (Python Mentor)</option>
+    </select>
+    <button id="callMentorBtn">📞 Call Selected Mentor</button>
+  </section>
+</body>
+</html>

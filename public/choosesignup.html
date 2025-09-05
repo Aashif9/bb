@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Leading Light</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .signup-options {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.03), rgba(58, 12, 163, 0.03));
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .signup-options{
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;     
+  /* text-align: center;      optional: center text inside elements */
+}
+   
+   
+
+    .signup-options::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://images.unsplash.com/photo-1516321310762-959200db5b04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.0.3&q=80&w=1080") center / cover no-repeat;
+      opacity: 0.02;
+      z-index: 0;
+    }
+
+    .signup-container {
+  text-align: center;
+  max-width: 600px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.signup-options .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+    .signup-container .section-header h2 {
+      font-size: 2.2rem;
+      color: var(--text-color);
+      margin-bottom: 10px;
+    }
+
+    .signup-container .section-header p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+
+    .option-card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 25px 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      position: relative;
+      /* justify-content: center; */
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    .option-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .option-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-primary);
+      transition: var(--transition);
+    }
+
+    .option-card.mentor::before {
+      background: var(--gradient-secondary);
+    }
+
+    .option-card:hover::before {
+      height: 8px;
+    }
+
+    .option-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      color: white;
+      font-size: 1.8rem;
+      transition: var(--transition);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .option-card.mentor .option-icon {
+      background: var(--gradient-secondary);
+    }
+
+    .option-card:hover .option-icon {
+      transform: rotate(8deg) scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .option-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--text-color);
+      font-weight: 700;
+    }
+
+    .option-card p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .option-card .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
+
+    .option-card.student .btn {
+      background: var(--gradient-primary);
+    }
+
+    .option-card.mentor .btn {
+      background: var(--gradient-secondary);
+    }
+
+    .option-card .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 300px;
+      }
+
+      .option-card {
+        padding: 20px 15px;
+      }
+
+      .signup-container .section-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .signup-container .section-header p {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .signup-container .section-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .signup-container .section-header p {
+        font-size: 0.85rem;
+      }
+
+      .option-card {
+        padding: 15px 12px;
+      }
+
+      .option-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+
+      .option-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .option-card p {
+        font-size: 0.8rem;
+        max-width: 180px;
+      }
+
+      .option-card .btn {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sign Up Options Section -->
+  <section class="signup-options">
+    <div class="container">
+      <div class="signup-container">
+        <div class="section-header animate-on-load">
+          <h2>Join Leading Light</h2>
+          <p>Choose your path to connect with top colleges and mentors, or share your expertise as a mentor.</p>
+        </div>
+        <div class="options-grid">
+          <div class="option-card student reveal-element">
+            <div class="option-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>Student Sign Up</h3>
+            <p>Discover reviews, connect with mentors, and choose your college confidently.</p>
+            <a href="signupstudent.html" class="btn btn-primary">Sign Up as a Student <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="option-card mentor reveal-element" data-delay="200">
+            <div class="option-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3>Mentor Sign Up</h3>
+            <p>Guide students and earn by sharing your expertise as a mentor.</p>
+            <a href="signupmentor.html" class="btn btn-secondary">Join as a Mentor <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <i class="fas fa-book-open"></i>
+            <span>Leading Light</span>
+          </div>
+          <p>Helping students make informed college decisions through verified reviews.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2023 Leading Light by Byte Brigade. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script>
+    // Scroll effects
+    document.addEventListener("DOMContentLoaded", () => {
+      const backToTop = document.querySelector(".back-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          backToTop.classList.add("active");
+        } else {
+          backToTop.classList.remove("active");
+        }
+      });
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Animation on load
+      const animateElements = document.querySelectorAll(".animate-on-load, .reveal-element");
+      animateElements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add("active");
+        }, el.dataset.delay || index * 100);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="signin.css">
+  <!-- Link to Google Fonts for Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Supabase CDN -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Back to Home Link -->
+    <a href="landing page.html" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" class="arrow-icon" viewBox="0 0 24 24" width="24" height="24">
+        <path fill="none" d="M0 0h24v24H0z"/>
+        <path d="M10 19l-7-7 7-7 1.41 1.41L5.83 11H21v2H5.83l5.58 5.59L10 19z"/>
+      </svg>
+      Back to home
+    </a>
+
+    <!-- Login Card -->
+    <div class="card">
+      <h2>Welcome back</h2>
+      <p>Sign in to your Leading Light account</p>
+
+      <form class="login-form">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="john.doe@example.com" required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" required>
+        </div>
+        <div class="forgot-password">
+            <a href="/forgot-password">Forgot Password?</a>
+          </div>
+          
+
+        <button type="submit">Sign in</button>
+      </form>
+
+      <div id="statusMsg">
+        <p>Don&apos;t have an account? <a href="choosesignup.html">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Include Supabase configuration -->
+  <script src="supabase-config.js"></script>
+  <!-- Include signin functionality -->
+  <script src="signin.js"></script>
+</body>
+</html>

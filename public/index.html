@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leading Light - Powered by Byte Brigade</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Cursor Animation  -->
+   <!-- <div class="cursor-dot-outline"></div> -->
+  <!-- <div class="cursor-dot"></div>  -->
+  <!-- <div class="custom-cursor"></div> -->
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-book-open"></i>
+        <span>Leading Light</span>
+        <span class="powered-by">by Byte Brigade</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <div class="auth-buttons">
+        <a href="signin.html" class="btn btn-outline">Login</a>
+        <a href="choosesignup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+      <div class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="#how-it-works" class="mobile-link">How It Works</a>
+    <a href="#testimonials" class="mobile-link">Testimonials</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <div class="mobile-auth">
+      <a href="signin.html" class="btn btn-outline">Login</a>
+      <a href="choosesignup.html" class="btn btn-primary">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="animate-on-load">Choose the Right College, Backed by Real Student Experiences</h1>
+        <p class="animate-on-load">Verified reviews from students with 9.0+ CGPA and top placements.</p>
+        <div class="hero-buttons animate-on-load">
+          <a href="signupstudent.html" class="btn btn-primary btn-lg">
+            <span>Sign Up as a Student</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="signupmentor.html" class="btn btn-secondary btn-lg">
+            <span>Join as a Mentor</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="hero-stats animate-on-load">
+          <div class="stat">
+            <span class="stat-number" data-count="5000">0</span>
+            <span class="stat-label">Students</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-count="500">0</span>
+            <span class="stat-label">Mentors</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-count="200">0</span>
+            <span class="stat-label">Colleges</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image animate-on-load">
+        <div class="image-container">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8c3R1ZGVudHx8fHx8fDE2ODI1MzU2MzQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="Students collaborating">
+          <div class="rating-badge">
+            <i class="fas fa-star"></i>
+            <span>4.9/5</span>
+            <span class="small-text">from 2,000+ reviews</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 -10 1070 200">
+        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-header reveal-element">
+        <h2>Why Choose Leading Light?</h2>
+        <p>Our platform offers unique insights from top-performing students to help you make the best decision for your future.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal-element">
+          <div class="feature-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3>Verified Reviews</h3>
+          <p>All reviews come from students with 9.0+ CGPA, ensuring quality insights.</p>
+        </div>
+        <div class="feature-card reveal-element" data-delay="200">
+          <div class="feature-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3>Premium Mentorship</h3>
+          <p>Connect directly with top students through paid chats and calls.</p>
+        </div>
+        <div class="feature-card reveal-element" data-delay="400">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Categorized Insights</h3>
+          <p>Filter reviews by CGPA, branch, college, and location for targeted research.</p>
+        </div>
+        <div class="feature-card reveal-element">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Verified Mentors</h3>
+          <p>All mentors are verified with their academic credentials and work experience.</p>
+        </div>
+        <div class="feature-card reveal-element" data-delay="200">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3>Flexible Scheduling</h3>
+          <p>Book sessions with mentors at times that work best for you.</p>
+        </div>
+        <div class="feature-card reveal-element" data-delay="400">
+          <div class="feature-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>Career Guidance</h3>
+          <p>Get insights on career paths and opportunities from successful alumni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <div class="section-header reveal-element">
+        <h2>How It Works</h2>
+        <p>Our simple process helps you get the information you need to make informed decisions.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal-element">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Sign Up</h3>
+            <p>Create an account as a student looking for guidance or as a mentor willing to share experiences.</p>
+          </div>
+        </div>
+        <div class="step reveal-element" data-delay="200">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Browse Reviews</h3>
+            <p>Access categorized reviews filtered by CGPA, branch, college, and location.</p>
+          </div>
+        </div>
+        <div class="step reveal-element" data-delay="400">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Connect with Mentors</h3>
+            <p>Unlock premium features to directly chat or call top-performing students for personalized guidance.</p>
+          </div>
+        </div>
+        <div class="step reveal-element" data-delay="600">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Make Informed Decisions</h3>
+            <p>Use the insights and guidance to choose the right college and career path for your future.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-header reveal-element">
+        <h2>What Our Users Say</h2>
+        <p>Hear from students who found their perfect college match through Leading Light.</p>
+      </div>
+      <div class="testimonial-carousel reveal-element">
+        <div class="testimonial-track">
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Leading Light helped me choose the perfect engineering college. The verified reviews from high-CGPA students gave me insights I couldn't find anywhere else."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
+              </div>
+              <div class="author-info">
+                <h4>Priya Sharma</h4>
+                <p>Computer Science Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"As a mentor on Leading Light, I've been able to guide students toward making informed decisions while earning extra income through the platform."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Patel">
+              </div>
+              <div class="author-info">
+                <h4>Rahul Patel</h4>
+                <p>Mentor, IIT Graduate</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"The premium mentorship feature was invaluable. I had a 30-minute call with a top medical student that completely changed my perspective on college selection."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Gupta">
+              </div>
+              <div class="author-info">
+                <h4>Ananya Gupta</h4>
+                <p>Medical Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"I was confused between multiple engineering colleges, but the detailed reviews on Leading Light helped me make the right choice. Now I'm thriving at my dream college!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Vikram Singh">
+              </div>
+              <div class="author-info">
+                <h4>Vikram Singh</h4>
+                <p>Engineering Student</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Mentors Section -->
+  <section class="featured-mentors">
+    <div class="container">
+      <div class="section-header reveal-element">
+        <h2>Featured Mentors</h2>
+        <p>Connect with top-performing students and alumni from prestigious institutions.</p>
+      </div>
+      <div class="mentors-grid">
+        <div class="mentor-card reveal-element">
+          <div class="mentor-avatar">
+            <img src="" alt="Arjun Mehta">
+            <div class="mentor-badge">9.8 CGPA</div>
+          </div>
+          <div class="mentor-info">
+            <h3>Arjun Mehta</h3>
+            <p class="mentor-college">IIT Bombay</p>
+            <p class="mentor-role">Software Engineer at Google</p>
+            <div class="mentor-skills">
+              <span>Computer Science</span>
+              <span>AI/ML</span>
+              <span>Competitive Programming</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm">View Profile</a>
+          </div>
+        </div>
+        <div class="mentor-card reveal-element" data-delay="200">
+          <div class="mentor-avatar">
+            <img src="" alt="Neha Sharma">
+            <div class="mentor-badge">9.6 CGPA</div>
+          </div>
+          <div class="mentor-info">
+            <h3>Neha Sharma</h3>
+            <p class="mentor-college">AIIMS Delhi</p>
+            <p class="mentor-role">Medical Resident</p>
+            <div class="mentor-skills">
+              <span>Medicine</span>
+              <span>NEET Preparation</span>
+              <span>Research</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm">View Profile</a>
+          </div>
+        </div>
+        <div class="mentor-card reveal-element" data-delay="400">
+          <div class="mentor-avatar">
+            <img src="" alt="Vikram Singh">
+            <div class="mentor-badge">9.5 CGPA</div>
+          </div>
+          <div class="mentor-info">
+            <h3>Vikram Singh</h3>
+            <p class="mentor-college">IIM Bangalore</p>
+            <p class="mentor-role">Management Consultant</p>
+            <div class="mentor-skills">
+              <span>MBA</span>
+              <span>Consulting</span>
+              <span>Finance</span>
+            </div>
+            <a href="#" class="btn btn-primary btn-sm">View Profile</a>
+          </div>
+        </div>
+      </div>
+      <div class="view-all-mentors reveal-element">
+        <a href="#" class="btn btn-outline btn-lg">
+          <span>View All Mentors</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <div class="section-header reveal-element">
+        <h2>Frequently Asked Questions</h2>
+        <p>Find answers to common questions about Leading Light.</p>
+      </div>
+      <div class="faq-container reveal-element">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do you verify mentors?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>We verify all mentors through a rigorous process that includes checking their academic credentials, CGPA certificates, and employment details. We also conduct video interviews to ensure they are who they claim to be.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How much does it cost to access reviews?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>We offer different subscription tiers starting at ₹499 per month for basic access to verified reviews. Premium tiers that include mentor sessions start at ₹999 per month.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Can I become a mentor if my CGPA is below 9.0?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Our platform primarily focuses on mentors with a CGPA of 9.0 or higher. However, we make exceptions for professionals with exceptional career achievements or those from specialized fields where such high CGPAs are uncommon.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How are mentor sessions conducted?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Mentor sessions are conducted through our secure in-platform video and chat system. You can schedule sessions based on the mentor's availability and your convenience. Each session typically lasts 30-45 minutes.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What if I'm not satisfied with a mentor session?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>We offer a satisfaction guarantee for all mentor sessions. If you're not satisfied with a session, you can request a refund or a free session with another mentor within 24 hours of the completed session.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content reveal-element">
+        <h2>Ready to Find Your Perfect College?</h2>
+        <p>Join thousands of students who made confident college decisions with Leading Light.</p>
+        <div class="cta-buttons">
+          <a href="signup.html?type=student" class="btn btn-light btn-lg">
+            <span>Sign Up as a Student</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="signup.html?type=mentor" class="btn btn-outline-light btn-lg">
+            <span>Join as a Mentor</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <i class="fas fa-book-open"></i>
+            <span>Leading Light</span>
+          </div>
+          <p>Helping students make informed college decisions through verified reviews.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Leading Light by Byte Brigade. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

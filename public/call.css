@@ -1,0 +1,79 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form, .mentor-section {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 2px solid #ffb86c;
+}
+
+textarea {
+  resize: vertical;
+  background-color: #fffbe6;
+}
+
+.rating-options label {
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+input[type="radio"] {
+  accent-color: #ff6b81;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  background: linear-gradient(to right, #ff6a88, #ff99ac);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(255, 106, 136, 0.5);
+}

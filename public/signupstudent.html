@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Signup Form</title>
+  <link rel="stylesheet" href="signupstudent.css">
+  <!-- Supabase CDN -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="container">
+    <form id="student-signup-form" class="form">
+      <div class="grid">
+        <div class="input-group">
+          <label for="first-name">First name</label>
+          <input type="text" id="first-name" placeholder="John" required>
+        </div>
+        <div class="input-group">
+          <label for="last-name">Last name</label>
+          <input type="text" id="last-name" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="john.doe@example.com" required>
+      </div>
+
+      <div class="input-group">
+        <label for="phone">Phone number</label>
+        <input type="tel" id="phone" placeholder="+91 9876543210" required>
+      </div>
+
+      <div class="input-group">
+        <label for="education-level">Education level</label>
+        <select id="education-level" required>
+          <option value="">Select your education level</option>
+          <option value="high-school">High School</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="graduate">Graduate</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="interested-field">Interested field of study</label>
+        <select id="interested-field" required>
+          <option value="">Select your field of interest</option>
+          <option value="engineering">Engineering</option>
+          <option value="medicine">Medicine</option>
+          <option value="business">Business</option>
+          <option value="arts">Arts & Humanities</option>
+          <option value="science">Science</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+      </div>
+
+      <div class="input-group">
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" id="confirm-password" required>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn" >Create student account</button>
+      <span id="loading-text" class="loading-text"></span>
+    </form>
+  </div>
+
+  <!-- Include Supabase configuration -->
+  <script src="supabase-config.js"></script>
+  <!-- Include signup functionality -->
+  <script src="signupstudent.js"></script>
+</body>
+</html>

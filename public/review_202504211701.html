@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review for Andhra University - Leading Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --primary-light: #4895ef;
+      --primary-dark: #3a0ca3;
+      --secondary-color: #f72585;
+      --secondary-light: #ff758f;
+      --secondary-dark: #b5179e;
+      --accent-color: #4cc9f0;
+      --text-color: #2b2d42;
+      --text-light: #8d99ae;
+      --background-color: #ffffff;
+      --background-alt: #f9fafc;
+      --success-color: #2ecc71;
+      --warning-color: #f39c12;
+      --error-color: #e74c3c;
+      --border-radius: 12px;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .review-details {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .review-details h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .review-details p {
+      margin-bottom: 10px;
+      color: var(--text-light);
+    }
+
+    .star-rating {
+      margin: 20px 0;
+    }
+
+    .star {
+      font-size: 1.5rem;
+      color: var(--warning-color);
+    }
+
+    .star.empty {
+      color: #ddd;
+    }
+
+    .feedback-section {
+      margin: 20px 0;
+    }
+
+    .category-section {
+      margin: 20px 0;
+    }
+
+    .category-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .category-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 8px 16px;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+    }
+
+    .tag.positive {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .tag.neutral {
+      background: #ddd;
+      color: var(--text-color);
+    }
+
+    .tag.negative {
+      background: var(--error-color);
+      color: white;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="container">
+      <div class="review-details">
+        <h2>Review for Andhra University</h2>
+        <p><strong>Mentor:</strong> Arjun Mehta</p>
+        <p><strong>Profession:</strong> Software Engineer at Google</p>
+        <p><strong>College Attended:</strong> IIT Bombay</p>
+        <p><strong>Date:</strong> April 21, 2025</p>
+        <div class="star-rating">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star empty"></i>
+        </div>
+        <div class="feedback-section">
+          <h3>Positive Feedback</h3>
+          <p>The university offers a robust curriculum with strong emphasis on research and innovation. The faculty is highly experienced and supportive.</p>
+        </div>
+        <div class="feedback-section">
+          <h3>Negative Feedback</h3>
+          <p>Some facilities, like the library and labs, need modernization. Placement support could be more proactive for certain branches.</p>
+        </div>
+        <div class="category-section">
+          <h3>Academics</h3>
+          <div class="category-tags">
+            <span class="tag positive">Engaging curriculum</span>
+            <span class="tag positive">Supportive faculty</span>
+            <span class="tag negative">Limited elective choices</span>
+          </div>
+        </div>
+        <div class="category-section">
+          <h3>Infrastructure</h3>
+          <div class="category-tags">
+            <span class="tag positive">Good library</span>
+            <span class="tag negative">Outdated equipment</span>
+          </div>
+        </div>
+        <div class="category-section">
+          <h3>Placement</h3>
+          <div class="category-tags">
+            <span class="tag neutral">Moderate placements</span>
+          </div>
+        </div>
+        <a href="mentor-home.html" class="btn btn-primary">Back to Home</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

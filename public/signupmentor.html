@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor Signup Form - Leading Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Supabase CDN -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --primary-light: #4895ef;
+      --primary-dark: #3a0ca3;
+      --secondary-color: #f72585;
+      --secondary-light: #ff758f;
+      --secondary-dark: #b5179e;
+      --accent-color: #4cc9f0;
+      --text-color: #2b2d42;
+      --text-light: #8d99ae;
+      --background-color: #ffffff;
+      --background-alt: #f9fafc;
+      --success-color: #2ecc71;
+      --warning-color: #f39c12;
+      --error-color: #e74c3c;
+      --border-radius: 12px;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-alt);
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: var(--background-color);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      box-shadow: var(--card-shadow);
+      max-width: 600px;
+      width: 100%;
+      margin: 20px;
+    }
+
+    h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--primary-dark);
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .input-group {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--text-light);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: var(--transition);
+      background-color: var(--background-color);
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(67, 97, 238, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    button:hover {
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+      transform: translateY(-2px);
+    }
+
+    #statusMsg {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    #statusMsg.error {
+      color: var(--error-color);
+    }
+
+    #statusMsg.success {
+      color: var(--success-color);
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .input-group {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Mentor Signup Form</h2>
+    <form id="mentorForm">
+      <div class="row">
+        <div class="input-group">
+          <label for="first-name">First Name</label>
+          <input type="text" name="first-name" id="first-name" placeholder="John" required />
+        </div>
+        <div class="input-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" name="last-name" id="last-name" placeholder="Doe" required />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="john.doe@example.com" required />
+      </div>
+
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" id="phone" placeholder="+91 9876543210" required />
+      </div>
+
+      <div class="input-group">
+        <label for="college">College/University</label>
+        <input type="text" name="college" id="college" placeholder="IIT Delhi" required />
+      </div>
+
+      <div class="input-group">
+        <label for="degree">Degree/Major</label>
+        <input type="text" name="degree" id="degree" placeholder="Computer Science Engineering" required />
+      </div>
+
+      <div class="input-group">
+        <label for="graduation-year">Graduation Year</label>
+        <select name="graduation-year" id="graduation-year" required>
+          <option value="" disabled selected>Select graduation year</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="current-role">Current Job Role</label>
+        <input type="text" name="current-role" id="current-role" placeholder="Software Engineer" required />
+      </div>
+
+      <div class="input-group">
+        <label for="company">Company/Organization</label>
+        <input type="text" name="company" id="company" placeholder="Google" required />
+      </div>
+
+      <div class="input-group">
+        <label for="experience">Years of Experience</label>
+        <input type="number" name="experience" id="experience" min="0" placeholder="3" required />
+      </div>
+
+      <div class="input-group">
+        <label for="expertise">Areas of Expertise</label>
+        <textarea name="expertise" id="expertise" placeholder="e.g., Web Development, Machine Learning, Data Science, Mobile Development" rows="3" required></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="mentoring-experience">Previous Mentoring Experience</label>
+        <select name="mentoring-experience" id="mentoring-experience" required>
+          <option value="" disabled selected>Select your mentoring experience</option>
+          <option value="none">No prior experience</option>
+          <option value="informal">Informal mentoring (friends, colleagues)</option>
+          <option value="formal">Formal mentoring programs</option>
+          <option value="extensive">Extensive mentoring experience</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="availability">Weekly Availability (hours)</label>
+        <select name="availability" id="availability" required>
+          <option value="" disabled selected>Select weekly availability</option>
+          <option value="1-2">1-2 hours</option>
+          <option value="3-5">3-5 hours</option>
+          <option value="6-10">6-10 hours</option>
+          <option value="10+">10+ hours</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="motivation">Why do you want to be a mentor?</label>
+        <textarea name="motivation" id="motivation" placeholder="Share your motivation for mentoring students..." rows="4" required></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+      </div>
+
+      <div class="input-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" name="confirm-password" id="confirm-password" required />
+      </div>
+
+      <button type="submit" id="submitBtn">Create Mentor Account</button>
+      <p id="statusMsg"></p>
+    </form>
+  </div>
+
+  <!-- Include Supabase configuration -->
+  <script src="supabase-config.js"></script>
+  <!-- Include mentor signup functionality -->
+  <script src="signupmentor.js"></script>
+</body>
+</html>

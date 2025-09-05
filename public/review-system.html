@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor College Review System - Leading Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --primary-light: #4895ef;
+      --primary-dark: #3a0ca3;
+      --secondary-color: #f72585;
+      --secondary-light: #ff758f;
+      --secondary-dark: #b5179e;
+      --accent-color: #4cc9f0;
+      --text-color: #2b2d42;
+      --text-light: #8d99ae;
+      --background-color: #ffffff;
+      --background-alt: #f9fafc;
+      --success-color: #2ecc71;
+      --warning-color: #f39c12;
+      --error-color: #e74c3c;
+      --border-radius: 12px;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: var(--transition);
+      background-color: transparent;
+    }
+
+    .navbar.scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .logo i {
+      margin-right: 10px;
+      font-size: 1.8rem;
+    }
+
+    .powered-by {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-left: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: white;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      transform: translateY(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .mobile-menu.active {
+      transform: translateY(0);
+    }
+
+    .mobile-link {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .review-section {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .mentor-profile, .college-review {
+      flex: 1;
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+      min-width: 300px;
+    }
+
+    .mentor-profile h2, .college-review h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .mentor-profile p, .college-review p {
+      margin-bottom: 10px;
+      color: var(--text-light);
+    }
+
+    .review-writing {
+      margin-top: 40px;
+    }
+
+    .review-writing h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      resize: vertical;
+      margin-bottom: 20px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .star-rating {
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .star-rating.active {
+      display: flex;
+      gap: 10px;
+    }
+
+    .star {
+      font-size: 1.5rem;
+      color: #ddd;
+      cursor: pointer;
+    }
+
+    .star.selected, .star:hover, .star:hover ~ .star {
+      color: var(--warning-color);
+    }
+
+    .category-section {
+      margin-bottom: 30px;
+    }
+
+    .category-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sentiment-btn {
+      padding: 8px 16px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      background: white;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sentiment-btn.positive {
+      background: var(--success-color);
+      color: white;
+      border-color: var(--success-color);
+    }
+
+    .sentiment-btn.neutral {
+      background: #ddd;
+      color: var(--text-color);
+      border-color: #ddd;
+    }
+
+    .sentiment-btn.negative {
+      background: var(--error-color);
+      color: white;
+      border-color: var(--error-color);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--success-color);
+      color: white;
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .review-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-book-open"></i>
+        <span>Leading Light</span>
+        <span class="powered-by">by Byte Brigade</span>
+      </div>
+      <div class="nav-links">
+        <a href="mentor-home.html" class="nav-link">Back</a>
+        <span class="username">Arjun Mehta</span>
+      </div>
+      <div class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="mentor-home.html" class="mobile-link">Back</a>
+    <div class="mobile-auth">
+      <span class="username">Arjun Mehta</span>
+    </div>
+  </div>
+
+  <!-- Review System -->
+  <section class="review-system">
+    <div class="container">
+      <div class="review-section">
+        <!-- Mentor Profile -->
+        <div class="mentor-profile">
+          <h2>Mentor Profile</h2>
+          <p><strong>Name:</strong> Arjun Mehta</p>
+          <p><strong>Profession:</strong> Software Engineer at Google</p>
+          <p><strong>College:</strong> IIT Bombay</p>
+        </div>
+        <!-- College Review -->
+        <div class="college-review">
+          <h2>Selected College</h2>
+          <p><strong>College:</strong> <span id="selected-college">ABC College</span></p>
+        </div>
+      </div>
+
+      <!-- Review Writing -->
+      <div class="review-writing">
+        <h2>Write Your Review</h2>
+        <textarea id="positive-feedback" placeholder="Enter positive feedback..." rows="5"></textarea>
+        <textarea id="negative-feedback" placeholder="Enter negative feedback..." rows="5"></textarea>
+
+        <!-- Star Rating -->
+        <div class="star-rating" id="star-rating">
+          <i class="fas fa-star star" data-value="1"></i>
+          <i class="fas fa-star star" data-value="2"></i>
+          <i class="fas fa-star star" data-value="3"></i>
+          <i class="fas fa-star star" data-value="4"></i>
+          <i class="fas fa-star star" data-value="5"></i>
+        </div>
+
+        <!-- Feedback Categories -->
+        <div class="category-section">
+          <h3>Academics</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="academics" data-value="Engaging and updated curriculum" data-sentiment="positive">Engaging curriculum</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Strong practical exposure" data-sentiment="positive">Strong practical exposure</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Experienced and supportive faculty" data-sentiment="positive">Supportive faculty</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Excellent academic guidance" data-sentiment="positive">Excellent guidance</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Research and innovation opportunities" data-sentiment="positive">Research opportunities</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Average syllabus" data-sentiment="neutral">Average syllabus</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Decent teaching methods" data-sentiment="neutral">Decent teaching</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Outdated syllabus" data-sentiment="negative">Outdated syllabus</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Lack of practical exposure" data-sentiment="negative">No practical exposure</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Unqualified faculty" data-sentiment="negative">Unqualified faculty</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Poor teaching methods" data-sentiment="negative">Poor teaching</button>
+            <button class="sentiment-btn" data-category="academics" data-value="Limited elective choices" data-sentiment="negative">Limited electives</button>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3>Infrastructure</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Modern classrooms" data-sentiment="positive">Modern classrooms</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Well-equipped labs" data-sentiment="positive">Well-equipped labs</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Good library resources" data-sentiment="positive">Good library</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Quality hostel facilities" data-sentiment="positive">Quality hostels</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Great sports/recreation areas" data-sentiment="positive">Great sports areas</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Standard facilities" data-sentiment="neutral">Standard facilities</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Acceptable cleanliness" data-sentiment="neutral">Acceptable cleanliness</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Poor classrooms" data-sentiment="negative">Poor classrooms</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Outdated equipment" data-sentiment="negative">Outdated equipment</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Inadequate library" data-sentiment="negative">Inadequate library</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Poor hostel conditions" data-sentiment="negative">Poor hostels</button>
+            <button class="sentiment-btn" data-category="infrastructure" data-value="Hygiene issues" data-sentiment="negative">Hygiene issues</button>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3>Placement and Career Support</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="placement" data-value="High placement rates" data-sentiment="positive">High placement rates</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Diverse companies visit campus" data-sentiment="positive">Diverse companies</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Strong internship programs" data-sentiment="positive">Strong internships</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Good placement training and workshops" data-sentiment="positive">Good training</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Active alumni and industry links" data-sentiment="positive">Strong alumni links</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Moderate placement outcomes" data-sentiment="neutral">Moderate placements</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Limited career guidance" data-sentiment="neutral">Limited guidance</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Low placement rates" data-sentiment="negative">Low placement rates</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Few companies participating" data-sentiment="negative">Few companies</button>
+            <button class="sentiment-btn" data-category="placement" data-value="No internship opportunities" data-sentiment="negative">No internships</button>
+            <button class="sentiment-btn" data-category="placement" data-value="Poor training programs" data-sentiment="negative">Poor training</button>
+            <button class="sentiment-btn" data-category="placement" data-value="No alumni or industry network" data-sentiment="negative">No alumni network</button>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3>Fee & Value</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="fee" data-value="Affordable for quality offered" data-sentiment="positive">Affordable quality</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Transparent fee breakdown" data-sentiment="positive">Transparent fees</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Good scholarship support" data-sentiment="positive">Good scholarships</button>
+            <button class="sentiment-btn" data-category="fee" data-value="High return on investment" data-sentiment="positive">High ROI</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Justified pricing" data-sentiment="positive">Justified pricing</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Average affordability" data-sentiment="neutral">Average affordability</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Somewhat justified cost" data-sentiment="neutral">Somewhat justified</button>
+            <button class="sentiment-btn" data-category="fee" data-value="High fees for low value" data-sentiment="negative">High fees</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Hidden charges" data-sentiment="negative">Hidden charges</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Poor scholarship access" data-sentiment="negative">Poor scholarships</button>
+            <button class="sentiment-btn" data-category="fee" data-value="No fee transparency" data-sentiment="negative">No transparency</button>
+            <button class="sentiment-btn" data-category="fee" data-value="Not value for money" data-sentiment="negative">Not value for money</button>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3>Canteen and Food Services</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="canteen" data-value="Tasty and affordable food" data-sentiment="positive">Tasty food</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Clean dining areas" data-sentiment="positive">Clean dining</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Varied and healthy options" data-sentiment="positive">Varied options</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Hygienic food practices" data-sentiment="positive">Hygienic practices</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Daily menu updates" data-sentiment="positive">Daily menu updates</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Average quality" data-sentiment="neutral">Average quality</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Limited variety" data-sentiment="neutral">Limited variety</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Poor food quality" data-sentiment="negative">Poor quality</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Unhygienic conditions" data-sentiment="negative">Unhygienic</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Repetitive meals" data-sentiment="negative">Repetitive meals</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="Overpriced food" data-sentiment="negative">Overpriced</button>
+            <button class="sentiment-btn" data-category="canteen" data-value="No healthy options" data-sentiment="negative">No healthy options</button>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3>Digital & Technical Facilities</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="digital" data-value="High-speed Wi-Fi" data-sentiment="positive">High-speed Wi-Fi</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Updated lab equipment" data-sentiment="positive">Updated equipment</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Access to e-learning platforms" data-sentiment="positive">E-learning access</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Good technical support" data-sentiment="positive">Good tech support</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Smart classrooms available" data-sentiment="positive">Smart classrooms</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Basic technical setup" data-sentiment="neutral">Basic setup</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Satisfactory performance" data-sentiment="neutral">Satisfactory performance</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Poor Wi-Fi" data-sentiment="negative">Poor Wi-Fi</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Outdated computers" data-sentiment="negative">Outdated computers</button>
+            <button class="sentiment-btn" data-category="digital" data-value="No e-learning access" data-sentiment="negative">No e-learning</button>
+            <button class="sentiment-btn" data-category="digital" data-value="No tech support" data-sentiment="negative">No tech support</button>
+            <button class="sentiment-btn" data-category="digital" data-value="Lack of smart classrooms" data-sentiment="negative">No smart classrooms</button>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3>Events & Activities</h3>
+          <div class="category-buttons">
+            <button class="sentiment-btn" data-category="events" data-value="Regular cultural and technical events" data-sentiment="positive">Regular events</button>
+            <button class="sentiment-btn" data-category="events" data-value="Student-led planning encouraged" data-sentiment="positive">Student-led planning</button>
+            <button class="sentiment-btn" data-category="events" data-value="Well-organized fests" data-sentiment="positive">Well-organized fests</button>
+            <button class="sentiment-btn" data-category="events" data-value="Variety of workshops/seminars" data-sentiment="positive">Varied workshops</button>
+            <button class="sentiment-btn" data-category="events" data-value="Active club participation" data-sentiment="positive">Active clubs</button>
+            <button class="sentiment-btn" data-category="events" data-value="Events exist but limited" data-sentiment="neutral">Limited events</button>
+            <button class="sentiment-btn" data-category="events" data-value="Moderate student involvement" data-sentiment="neutral">Moderate involvement</button>
+            <button class="sentiment-btn" data-category="events" data-value="Few or no events" data-sentiment="negative">Few events</button>
+            <button class="sentiment-btn" data-category="events" data-value="Poor event planning" data-sentiment="negative">Poor planning</button>
+            <button class="sentiment-btn" data-category="events" data-value="No workshops or technical fests" data-sentiment="negative">No workshops</button>
+            <button class="sentiment-btn" data-category="events" data-value="Low student involvement" data-sentiment="negative">Low involvement</button>
+            <button class="sentiment-btn" data-category="events" data-value="Repetitive and boring activities" data-sentiment="negative">Boring activities</button>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-primary" id="submit-btn" disabled>Submit Review</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Review submitted successfully!</div>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    });
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Update Selected College from URL Query Parameter
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const collegeName = urlParams.get('college');
+      const selectedCollegeElement = document.getElementById('selected-college');
+      if (collegeName) {
+        selectedCollegeElement.textContent = decodeURIComponent(collegeName);
+      }
+    });
+
+    // Review System Logic
+    const positiveFeedback = document.getElementById('positive-feedback');
+    const negativeFeedback = document.getElementById('negative-feedback');
+    const starRating = document.getElementById('star-rating');
+    const stars = document.querySelectorAll('.star');
+    const submitBtn = document.getElementById('submit-btn');
+    const sentimentButtons = document.querySelectorAll('.sentiment-btn');
+    const toast = document.getElementById('toast');
+
+    let selectedRating = 0;
+    const selectedCategories = {};
+
+    // Show star rating when both feedback fields are filled
+    function checkFeedback() {
+      if (positiveFeedback.value.trim() && negativeFeedback.value.trim()) {
+        starRating.classList.add('active');
+      } else {
+        starRating.classList.remove('active');
+        selectedRating = 0;
+        stars.forEach(star => star.classList.remove('selected'));
+      }
+      updateSubmitButton();
+    }
+
+    positiveFeedback.addEventListener('input', checkFeedback);
+    negativeFeedback.addEventListener('input', checkFeedback);
+
+    // Star rating selection
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-value'));
+        stars.forEach(s => {
+          s.classList.toggle('selected', parseInt(s.getAttribute('data-value')) <= selectedRating);
+        });
+        updateSubmitButton();
+      });
+    });
+
+    // Sentiment button toggle
+    sentimentButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        const value = button.getAttribute('data-value');
+        const sentiment = button.getAttribute('data-sentiment');
+
+        // Toggle button state
+        const isSelected = button.classList.contains(sentiment);
+        sentimentButtons.forEach(btn => {
+          if (btn.getAttribute('data-category') === category && btn.getAttribute('data-value') === value) {
+            btn.classList.remove('positive', 'neutral', 'negative');
+            if (!isSelected) {
+              btn.classList.add(sentiment);
+            }
+          }
+        });
+
+        // Update selected categories
+        if (!selectedCategories[category]) {
+          selectedCategories[category] = [];
+        }
+        if (!isSelected) {
+          selectedCategories[category].push({ value, sentiment });
+        } else {
+          selectedCategories[category] = selectedCategories[category].filter(item => item.value !== value);
+          if (selectedCategories[category].length === 0) {
+            delete selectedCategories[category];
+          }
+        }
+        updateSubmitButton();
+      });
+    });
+
+    // Enable submit button when all required fields are filled
+    function updateSubmitButton() {
+      submitBtn.disabled = !(positiveFeedback.value.trim() && negativeFeedback.value.trim() && selectedRating > 0 && Object.keys(selectedCategories).length > 0);
+    }
+
+    // Generate Review HTML
+    function generateReviewHtml(reviewData) {
+      const timestamp = new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 12);
+      const filename = `review_${timestamp}.html`;
+      const categoryHtml = Object.entries(reviewData.categories)
+        .map(([category, tags]) => `
+          <div class="category-section">
+            <h3>${category.charAt(0).toUpperCase() + category.slice(1)}</h3>
+            <div class="category-tags">
+              ${tags.map(tag => `
+                <span class="tag ${tag.sentiment}">
+                  ${tag.value}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+
+      const reviewHtml = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Review for ${reviewData.college} - Leading Light</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+          <style>
+            :root {
+              --primary-color: #4361ee;
+              --primary-light: #4895ef;
+              --primary-dark: #3a0ca3;
+              --secondary-color: #f72585;
+              --secondary-light: #ff758f;
+              --secondary-dark: #b5179e;
+              --accent-color: #4cc9f0;
+              --text-color: #2b2d42;
+              --text-light: #8d99ae;
+              --background-color: #ffffff;
+              --background-alt: #f9fafc;
+              --success-color: #2ecc71;
+              --warning-color: #f39c12;
+              --error-color: #e74c3c;
+              --border-radius: 12px;
+              --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+              --transition: all 0.3s ease;
+              --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            }
+
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+
+            body {
+              font-family: "Poppins", sans-serif;
+              color: var(--text-color);
+              background-color: var(--background-color);
+              line-height: 1.6;
+            }
+
+            .container {
+              width: 100%;
+              max-width: 1200px;
+              margin: 0 auto;
+              padding: 0 20px;
+            }
+
+            section {
+              padding: 80px 0;
+            }
+
+            .review-details {
+              background: white;
+              border-radius: var(--border-radius);
+              padding: 30px;
+              box-shadow: var(--card-shadow);
+            }
+
+            .review-details h2 {
+              font-size: 1.5rem;
+              margin-bottom: 20px;
+            }
+
+            .review-details p {
+              margin-bottom: 10px;
+              color: var(--text-light);
+            }
+
+            .star-rating {
+              margin: 20px 0;
+            }
+
+            .star {
+              font-size: 1.5rem;
+              color: var(--warning-color);
+            }
+
+            .star.empty {
+              color: #ddd;
+            }
+
+            .feedback-section {
+              margin: 20px 0;
+            }
+
+            .category-section {
+              margin: 20px 0;
+            }
+
+            .category-section h3 {
+              font-size: 1.2rem;
+              margin-bottom: 15px;
+            }
+
+            .category-tags {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px;
+            }
+
+            .tag {
+              padding: 8px 16px;
+              border-radius: var(--border-radius);
+              font-size: 0.9rem;
+            }
+
+            .tag.positive {
+              background: var(--success-color);
+              color: white;
+            }
+
+            .tag.neutral {
+              background: #ddd;
+              color: var(--text-color);
+            }
+
+            .tag.negative {
+              background: var(--error-color);
+              color: white;
+            }
+
+            .btn {
+              display: inline-flex;
+              align-items: center;
+              padding: 12px 24px;
+              border-radius: var(--border-radius);
+              font-weight: 600;
+              font-size: 1rem;
+              transition: var(--transition);
+              cursor: pointer;
+              border: none;
+            }
+
+            .btn-primary {
+              background: var(--gradient-primary);
+              color: white;
+              box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            }
+
+            .btn-primary:hover {
+              box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+              transform: translateY(-2px);
+            }
+          </style>
+        </head>
+        <body>
+          <section>
+            <div class="container">
+              <div class="review-details">
+                <h2>Review for ${reviewData.college}</h2>
+                <p><strong>Mentor:</strong> ${reviewData.mentor}</p>
+                <p><strong>Profession:</strong> ${reviewData.profession}</p>
+                <p><strong>College Attended:</strong> ${reviewData.mentorCollege}</p>
+                <p><strong>Date:</strong> ${reviewData.date}</p>
+                <div class="star-rating">
+                  ${[...Array(5)].map((_, i) => `
+                    <i class="fas fa-star star ${i < reviewData.rating ? '' : 'empty'}"></i>
+                  `).join('')}
+                </div>
+                <div class="feedback-section">
+                  <h3>Positive Feedback</h3>
+                  <p>${reviewData.positiveFeedback}</p>
+                </div>
+                <div class="feedback-section">
+                  <h3>Negative Feedback</h3>
+                  <p>${reviewData.negativeFeedback}</p>
+                </div>
+                ${categoryHtml}
+                <a href="mentor-home.html" class="btn btn-primary">Back to Home</a>
+              </div>
+            </div>
+          </section>
+        </body>
+        </html>
+      `;
+      return { filename, html: reviewHtml };
+    }
+
+    // Submit Review
+    submitBtn.addEventListener('click', () => {
+      if (!submitBtn.disabled) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const collegeName = urlParams.get('college') || 'Unknown College';
+        const reviewData = {
+          mentor: 'Arjun Mehta',
+          profession: 'Software Engineer at Google',
+          mentorCollege: 'IIT Bombay',
+          college: decodeURIComponent(collegeName),
+          positiveFeedback: positiveFeedback.value.trim(),
+          negativeFeedback: negativeFeedback.value.trim(),
+          rating: selectedRating,
+          categories: selectedCategories,
+          date: new Date().toLocaleDateString()
+        };
+
+        // Generate the review HTML
+        const { filename, html } = generateReviewHtml(reviewData);
+
+        // Store review metadata in localStorage
+        const reviews = JSON.parse(localStorage.getItem('uploadedReviews') || '[]');
+        reviews.push({
+          college: reviewData.college,
+          date: reviewData.date,
+          reviewPage: filename
+        });
+        localStorage.setItem('uploadedReviews', JSON.stringify(reviews));
+
+        // Store review HTML in localStorage (simulating file creation)
+        localStorage.setItem(filename, html);
+
+        // Show toast notification
+        toast.classList.add('active');
+        setTimeout(() => {
+          toast.classList.remove('active');
+        }, 3000);
+
+        // Reset form
+        positiveFeedback.value = '';
+        negativeFeedback.value = '';
+        starRating.classList.remove('active');
+        stars.forEach(star => star.classList.remove('selected'));
+        sentimentButtons.forEach(btn => btn.classList.remove('positive', 'neutral', 'negative'));
+        selectedRating = 0;
+        Object.keys(selectedCategories).forEach(key => delete selectedCategories[key]);
+        submitBtn.disabled = true;
+
+        // Redirect to mentor-home.html
+        setTimeout(() => {
+          window.location.href = 'mentor-home.html';
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>

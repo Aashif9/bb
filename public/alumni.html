@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alumni - Leading Light</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .alumni-page {
+      padding: 120px 0;
+      background-color: var(--background-color);
+    }
+
+    .alumni-page .container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .filters-container {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .filters-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .filters-header h2 {
+      font-size: 1.8rem;
+      color: var(--text-color);
+    }
+
+    .clear-filters {
+      background: transparent;
+      border: none;
+      color: var(--error-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .clear-filters:hover {
+      color: var(--error-color);
+      text-decoration: underline;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .filter {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .filter label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+
+    .filter select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .filter select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .filter-tag {
+      background: var(--primary-light);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .filter-tag .remove-tag {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .alumni-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .alumni-card {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .alumni-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .alumni-avatar {
+      position: relative;
+      height: 200px;
+    }
+
+    .alumni-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .alumni-status {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary-color);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .alumni-info {
+      padding: 20px;
+    }
+
+    .alumni-info h3 {
+      margin-bottom: 5px;
+      font-size: 1.3rem;
+    }
+
+    .alumni-college {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .alumni-role {
+      color: var(--text-light);
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .alumni-review {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .alumni-location {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 15px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .pagination button {
+      padding: 10px 20px;
+      border: none;
+      background: var(--primary-color);
+      color: white;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .pagination button:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+    }
+
+    .pagination button:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .no-alumni {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--text-light);
+      padding: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-book-open"></i>
+        <span>Leading Light</span>
+        <span class="powered-by">by Byte Brigade</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <div class="auth-buttons">
+        <a href="signin.html" class="btn btn-outline">Login</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+      <div class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="#features" class="mobile-link">Features</a>
+    <a href="#how-it-works" class="mobile-link">How It Works</a>
+    <a href="#testimonials" class="mobile-link">Testimonials</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <div class="mobile-auth">
+      <a href="login.html" class="btn btn-outline">Login</a>
+      <a href="signup.html" class="btn btn-primary">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Alumni Section -->
+  <section class="alumni-page">
+    <div class="container">
+      <div class="section-header">
+        <h2>Alumni Reviews</h2>
+        <p>Read reviews from current students and alumni of top colleges across India.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-container">
+        <div class="filters-header">
+          <h2>Filters</h2>
+          <button class="clear-filters">Clear All Filters</button>
+        </div>
+        <div class="filter-group">
+          <div class="filter">
+            <label for="college">College</label>
+            <select id="college">
+              <option value="">All Colleges</option>
+              <option value="IIT Bombay">IIT Bombay</option>
+              <option value="IIT Delhi">IIT Delhi</option>
+              <option value="IIT Madras">IIT Madras</option>
+              <option value="IIT Kanpur">IIT Kanpur</option>
+              <option value="IIT Kharagpur">IIT Kharagpur</option>
+              <option value="IIT Roorkee">IIT Roorkee</option>
+              <option value="IIT Guwahati">IIT Guwahati</option>
+              <option value="IIT Hyderabad">IIT Hyderabad</option>
+              <option value="IIT Bhubaneswar">IIT Bhubaneswar</option>
+              <option value="IIT Gandhinagar">IIT Gandhinagar</option>
+              <option value="IIT Jodhpur">IIT Jodhpur</option>
+              <option value="IIT Patna">IIT Patna</option>
+              <option value="IIT Ropar">IIT Ropar</option>
+              <option value="IIT Indore">IIT Indore</option>
+              <option value="IIT Mandi">IIT Mandi</option>
+              <option value="IIT Varanasi">IIT Varanasi</option>
+              <option value="IIT Palakkad">IIT Palakkad</option>
+              <option value="IIT Tirupati">IIT Tirupati</option>
+              <option value="IIT Dhanbad">IIT Dhanbad</option>
+              <option value="IIT Bhilai">IIT Bhilai</option>
+              <option value="IIT Goa">IIT Goa</option>
+              <option value="IIT Jammu">IIT Jammu</option>
+              <option value="IIT Dharwad">IIT Dharwad</option>
+              <option value="IISc Bangalore">IISc Bangalore</option>
+              <option value="NIT Trichy">NIT Trichy</option>
+              <option value="NIT Surathkal">NIT Surathkal</option>
+              <option value="NIT Warangal">NIT Warangal</option>
+              <option value="NIT Rourkela">NIT Rourkela</option>
+              <option value="NIT Calicut">NIT Calicut</option>
+              <option value="NIT Kurukshetra">NIT Kurukshetra</option>
+              <option value="NIT Durgapur">NIT Durgapur</option>
+              <option value="NIT Silchar">NIT Silchar</option>
+              <option value="NIT Jalandhar">NIT Jalandhar</option>
+              <option value="NIT Hamirpur">NIT Hamirpur</option>
+              <option value="NIT Jaipur">NIT Jaipur</option>
+              <option value="NIT Allahabad">NIT Allahabad</option>
+              <option value="NIT Bhopal">NIT Bhopal</option>
+              <option value="NIT Nagpur">NIT Nagpur</option>
+              <option value="NIT Patna">NIT Patna</option>
+              <option value="NIT Raipur">NIT Raipur</option>
+              <option value="NIT Jamshedpur">NIT Jamshedpur</option>
+              <option value="NIT Agartala">NIT Agartala</option>
+              <option value="NIT Srinagar">NIT Srinagar</option>
+              <option value="NIT Goa">NIT Goa</option>
+              <option value="NIT Manipur">NIT Manipur</option>
+              <option value="NIT Meghalaya">NIT Meghalaya</option>
+              <option value="NIT Mizoram">NIT Mizoram</option>
+              <option value="NIT Nagaland">NIT Nagaland</option>
+              <option value="NIT Puducherry">NIT Puducherry</option>
+              <option value="NIT Sikkim">NIT Sikkim</option>
+              <option value="AIIMS Delhi">AIIMS Delhi</option>
+              <option value="AIIMS Bhopal">AIIMS Bhopal</option>
+              <option value="AIIMS Bhubaneswar">AIIMS Bhubaneswar</option>
+              <option value="AIIMS Jodhpur">AIIMS Jodhpur</option>
+              <option value="AIIMS Patna">AIIMS Patna</option>
+              <option value="AIIMS Raipur">AIIMS Raipur</option>
+              <option value="AIIMS Rishikesh">AIIMS Rishikesh</option>
+              <option value="IIM Ahmedabad">IIM Ahmedabad</option>
+              <option value="IIM Bangalore">IIM Bangalore</option>
+              <option value="IIM Calcutta">IIM Calcutta</option>
+              <option value="IIM Lucknow">IIM Lucknow</option>
+              <option value="IIM Indore">IIM Indore</option>
+              <option value="IIM Kozhikode">IIM Kozhikode</option>
+              <option value="IIM Shillong">IIM Shillong</option>
+              <option value="IIM Rohtak">IIM Rohtak</option>
+              <option value="IIM Ranchi">IIM Ranchi</option>
+              <option value="IIM Raipur">IIM Raipur</option>
+              <option value="IIM Trichy">IIM Trichy</option>
+              <option value="IIM Udaipur">IIM Udaipur</option>
+              <option value="IIM Kashipur">IIM Kashipur</option>
+              <option value="BITS Pilani">BITS Pilani</option>
+              <option value="BITS Goa">BITS Goa</option>
+              <option value="BITS Hyderabad">BITS Hyderabad</option>
+              <option value="VIT Vellore">VIT Vellore</option>
+              <option value="SRM Chennai">SRM Chennai</option>
+              <option value="Amity Noida">Amity Noida</option>
+              <option value="Manipal University">Manipal University</option>
+              <option value="Jadavpur University">Jadavpur University</option>
+              <option value="Anna University">Anna University</option>
+              <option value="Delhi University">Delhi University</option>
+              <option value="JNU Delhi">JNU Delhi</option>
+              <option value="BHU Varanasi">BHU Varanasi</option>
+              <option value="Osmania University">Osmania University</option>
+              <option value="Calcutta University">Calcutta University</option>
+              <option value="Pune University">Pune University</option>
+              <option value="Mumbai University">Mumbai University</option>
+              <option value="Andhra University">Andhra University</option>
+              <option value="Kerala University">Kerala University</option>
+              <option value="Madras University">Madras University</option>
+              <option value="Bangalore University">Bangalore University</option>
+              <option value="Panjab University">Panjab University</option>
+              <option value="Aligarh Muslim University">Aligarh Muslim University</option>
+              <option value="Hyderabad University">Hyderabad University</option>
+              <option value="Gujarat University">Gujarat University</option>
+              <option value="Rajasthan University">Rajasthan University</option>
+              <option value="Shivaji University">Shivaji University</option>
+              <option value="Lucknow University">Lucknow University</option>
+              <option value="Patna University">Patna University</option>
+              <option value="Karnataka University">Karnataka University</option>
+              <option value="SV University Tirupati">SV University Tirupati</option>
+              <option value="Acharya Nagarjuna University">Acharya Nagarjuna University</option>
+              <option value="JNTU Kakinada">JNTU Kakinada</option>
+              <option value="JNTU Anantapur">JNTU Anantapur</option>
+              <option value="Sri Venkateswara College of Engineering">Sri Venkateswara College of Engineering</option>
+              <option value="GITAM University Visakhapatnam">GITAM University Visakhapatnam</option>
+              <option value="K L University Vijayawada">K L University Vijayawada</option>
+              <option value="Vignan's University Guntur">Vignan's University Guntur</option>
+              <option value="RVR & JC College of Engineering">RVR & JC College of Engineering</option>
+              <option value="Sree Vidyanikethan Engineering College">Sree Vidyanikethan Engineering College</option>
+              <option value="JNTU Hyderabad">JNTU Hyderabad</option>
+              <option value="Osmania College of Engineering">Osmania College of Engineering</option>
+              <option value="CBIT Hyderabad">CBIT Hyderabad</option>
+              <option value="VNR VJIET Hyderabad">VNR VJIET Hyderabad</option>
+              <option value="Gokaraju Rangaraju Institute of Engineering">Gokaraju Rangaraju Institute of Engineering</option>
+              <option value="Malla Reddy College of Engineering">Malla Reddy College of Engineering</option>
+              <option value="Sreenidhi Institute of Science and Technology">Sreenidhi Institute of Science and Technology</option>
+              <option value="CVR College of Engineering">CVR College of Engineering</option>
+              <option value="Vasavi College of Engineering">Vasavi College of Engineering</option>
+              <option value="Muffakham Jah College of Engineering">Muffakham Jah College of Engineering</option>
+              <option value="RV College of Engineering">RV College of Engineering</option>
+              <option value="BMS College of Engineering">BMS College of Engineering</option>
+              <option value="PES University Bangalore">PES University Bangalore</option>
+              <option value="MS Ramaiah Institute of Technology">MS Ramaiah Institute of Technology</option>
+              <option value="Bangalore Institute of Technology">Bangalore Institute of Technology</option>
+              <option value="Dayananda Sagar College of Engineering">Dayananda Sagar College of Engineering</option>
+              <option value="Sir M Visvesvaraya Institute of Technology">Sir M Visvesvaraya Institute of Technology</option>
+              <option value="Nitte Meenakshi Institute of Technology">Nitte Meenakshi Institute of Technology</option>
+              <option value="Siddaganga Institute of Technology">Siddaganga Institute of Technology</option>
+              <option value="KLE Technological University">KLE Technological University</option>
+              <option value="Cochin University of Science and Technology">Cochin University of Science and Technology</option>
+              <option value="Thiagarajar College of Engineering">Thiagarajar College of Engineering</option>
+              <option value="PSG College of Technology">PSG College of Technology</option>
+              <option value="SASTRA University">SASTRA University</option>
+              <option value="Amrita Vishwa Vidyapeetham">Amrita Vishwa Vidyapeetham</option>
+              <option value="Karunya Institute of Technology">Karunya Institute of Technology</option>
+              <option value="Lovely Professional University">Lovely Professional University</option>
+              <option value="Chandigarh University">Chandigarh University</option>
+              <option value="Vellore Institute of Technology Chennai">Vellore Institute of Technology Chennai</option>
+              <option value="Symbiosis International University">Symbiosis International University</option>
+              <option value="Christ University Bangalore">Christ University Bangalore</option>
+              <option value="Jain University Bangalore">Jain University Bangalore</option>
+              <option value="Alliance University Bangalore">Alliance University Bangalore</option>
+              <option value="REVA University Bangalore">REVA University Bangalore</option>
+              <option value="CMR Institute of Technology">CMR Institute of Technology</option>
+              <option value="New Horizon College of Engineering">New Horizon College of Engineering</option>
+              <option value="Vel Tech Chennai">Vel Tech Chennai</option>
+              <option value="Hindustan Institute of Technology">Hindustan Institute of Technology</option>
+              <option value="B.S. Abdur Rahman Crescent Institute">B.S. Abdur Rahman Crescent Institute</option>
+              <option value="Kalinga Institute of Industrial Technology">Kalinga Institute of Industrial Technology</option>
+              <option value="Siksha 'O' Anusandhan University">Siksha 'O' Anusandhan University</option>
+              <option value="Thapar Institute of Engineering">Thapar Institute of Engineering</option>
+              <option value="Jamia Millia Islamia">Jamia Millia Islamia</option>
+              <option value="Alagappa University">Alagappa University</option>
+              <option value="Bharathiar University">Bharathiar University</option>
+              <option value="Annamalai University">Annamalai University</option>
+            </select>
+          </div>
+          <div class="filter">
+            <label for="location">Location</label>
+            <select id="location">
+              <option value="">All Locations</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Pune">Pune</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Jaipur">Jaipur</option>
+              <option value="Lucknow">Lucknow</option>
+              <option value="Visakhapatnam">Visakhapatnam</option>
+              <option value="Vijayawada">Vijayawada</option>
+              <option value="Tirupati">Tirupati</option>
+              <option value="Guntur">Guntur</option>
+              <option value="Warangal">Warangal</option>
+              <option value="Mysore">Mysore</option>
+              <option value="Mangalore">Mangalore</option>
+              <option value="Hubli">Hubli</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-tags" id="filter-tags"></div>
+      </div>
+
+      <!-- Alumni Grid -->
+      <div class="alumni-grid" id="alumni-grid"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination">
+        <button id="prev-page" disabled>Previous</button>
+        <button id="next-page">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <i class="fas fa-book-open"></i>
+            <span>Leading Light</span>
+          </div>
+          <p>Helping students make informed college decisions through verified reviews.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2023 Leading Light by Byte Brigade. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script>
+    // Colleges list for random assignment
+    const colleges = [
+      "IIT Bombay", "IIT Delhi", "IIT Madras", "IIT Kanpur", "IIT Kharagpur", "IIT Roorkee", "IIT Guwahati",
+      "IIT Hyderabad", "IIT Bhubaneswar", "IIT Gandhinagar", "IIT Jodhpur", "IIT Patna", "IIT Ropar",
+      "IIT Indore", "IIT Mandi", "IIT Varanasi", "IIT Palakkad", "IIT Tirupati", "IIT Dhanbad",
+      "IIT Bhilai", "IIT Goa", "IIT Jammu", "IIT Dharwad", "IISc Bangalore", "NIT Trichy",
+      "NIT Surathkal", "NIT Warangal", "NIT Rourkela", "NIT Calicut", "NIT Kurukshetra", "NIT Durgapur",
+      "NIT Silchar", "NIT Jalandhar", "NIT Hamirpur", "NIT Jaipur", "NIT Allahabad", "NIT Bhopal",
+      "NIT Nagpur", "NIT Patna", "NIT Raipur", "NIT Jamshedpur", "NIT Agartala", "NIT Srinagar",
+      "NIT Goa", "NIT Manipur", "NIT Meghalaya", "NIT Mizoram", "NIT Nagaland", "NIT Puducherry",
+      "NIT Sikkim", "AIIMS Delhi", "AIIMS Bhopal", "AIIMS Bhubaneswar", "AIIMS Jodhpur", "AIIMS Patna",
+      "AIIMS Raipur", "AIIMS Rishikesh", "IIM Ahmedabad", "IIM Bangalore", "IIM Calcutta", "IIM Lucknow",
+      "IIM Indore", "IIM Kozhikode", "IIM Shillong", "IIM Rohtak", "IIM Ranchi", "IIM Raipur",
+      "IIM Trichy", "IIM Udaipur", "IIM Kashipur", "BITS Pilani", "BITS Goa", "BITS Hyderabad",
+      "VIT Vellore", "SRM Chennai", "Amity Noida", "Manipal University", "Jadavpur University",
+      "Anna University", "Delhi University", "JNU Delhi", "BHU Varanasi", "Osmania University",
+      "Calcutta University", "Pune University", "Mumbai University", "Andhra University",
+      "Kerala University", "Madras University", "Bangalore University", "Panjab University",
+      "Aligarh Muslim University", "Hyderabad University", "Gujarat University", "Rajasthan University",
+      "Shivaji University", "Lucknow University", "Patna University", "Karnataka University",
+      "SV University Tirupati", "Acharya Nagarjuna University", "JNTU Kakinada", "JNTU Anantapur",
+      "Sri Venkateswara College of Engineering", "GITAM University Visakhapatnam", "K L University Vijayawada",
+      "Vignan's University Guntur", "RVR & JC College of Engineering", "Sree Vidyanikethan Engineering College",
+      "JNTU Hyderabad", "Osmania College of Engineering", "CBIT Hyderabad", "VNR VJIET Hyderabad",
+      "Gokaraju Rangaraju Institute of Engineering", "Malla Reddy College of Engineering",
+      "Sreenidhi Institute of Science and Technology", "CVR College of Engineering", "Vasavi College of Engineering",
+      "Muffakham Jah College of Engineering", "RV College of Engineering", "BMS College of Engineering",
+      "PES University Bangalore", "MS Ramaiah Institute of Technology", "Bangalore Institute of Technology",
+      "Dayananda Sagar College of Engineering", "Sir M Visvesvaraya Institute of Technology",
+      "Nitte Meenakshi Institute of Technology", "Siddaganga Institute of Technology", "KLE Technological University",
+      "Cochin University of Science and Technology", "Thiagarajar College of Engineering", "PSG College of Technology",
+      "SASTRA University", "Amrita Vishwa Vidyapeetham", "Karunya Institute of Technology",
+      "Lovely Professional University", "Chandigarh University", "Vellore Institute of Technology Chennai",
+      "Symbiosis International University", "Christ University Bangalore", "Jain University Bangalore",
+      "Alliance University Bangalore", "REVA University Bangalore", "CMR Institute of Technology",
+      "New Horizon College of Engineering", "Vel Tech Chennai", "Hindustan Institute of Technology",
+      "B.S. Abdur Rahman Crescent Institute", "Kalinga Institute of Industrial Technology",
+      "Siksha 'O' Anusandhan University", "Thapar Institute of Engineering", "Jamia Millia Islamia",
+      "Alagappa University", "Bharathiar University", "Annamalai University"
+    ];
+
+    // Sample alumni data (250+ alumni)
+    const alumni = [
+      {
+        name: "Arjun Mehta",
+        college: "IIT Bombay",
+        status: "Alumnus",
+        role: "Software Engineer at Google",
+        location: "Mumbai",
+        review: "IIT Bombay provided an excellent environment for learning and innovation. The faculty and peer group were instrumental in shaping my career.",
+        // avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      {
+        name: "Neha Sharma",
+        college: "AIIMS Delhi",
+        status: "Current Student",
+        role: "Medical Student",
+        location: "Delhi",
+        review: "AIIMS Delhi has world-class facilities and faculty. The rigorous curriculum prepares us well for the medical field.",
+        // avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      {
+        name: "Vikram Singh",
+        college: "IIM Bangalore",
+        status: "Alumnus",
+        role: "Management Consultant",
+        location: "Bangalore",
+        review: "IIM Bangalore's case-study-based learning was phenomenal. The alumni network is incredibly supportive.",
+        // avatar: "https://randomuser.me/api/portraits/men/75.jpg"
+      },
+      {
+        name: "Priya Patel",
+        college: "NIT Trichy",
+        status: "Current Student",
+        role: "Engineering Student",
+        location: "Chennai",
+        review: "NIT Trichy offers great placement opportunities and a vibrant campus life. The technical clubs are a highlight!",
+        // avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+      },
+      {
+        name: "Rahul Gupta",
+        college: "BITS Pilani",
+        status: "Alumnus",
+        role: "Product Manager at Microsoft",
+        location: "Hyderabad",
+        review: "BITS Pilani's flexible curriculum allowed me to explore diverse interests. The entrepreneurial ecosystem is top-notch.",
+        // avatar: "https://randomuser.me/api/portraits/men/45.jpg"
+      },
+      {
+        name: "Ananya Reddy",
+        college: "VIT Vellore",
+        status: "Current Student",
+        role: "Computer Science Student",
+        location: "Pune",
+        review: "VIT Vellore has a dynamic campus with excellent infrastructure. The industry exposure is fantastic.",
+        // avatar: "https://randomuser.me/api/portraits/women/22.jpg"
+      },
+      {
+        name: "Siddharth Kumar",
+        college: "IIT Delhi",
+        status: "Alumnus",
+        role: "AI Researcher",
+        location: "Delhi",
+        review: "IIT Delhi's research facilities and faculty mentorship were key to my success in AI research.",
+        // avatar: "https://randomuser.me/api/portraits/men/19.jpg"
+      },
+      {
+        name: "Aisha Khan",
+        college: "Jadavpur University",
+        status: "Current Student",
+        role: "Electronics Student",
+        location: "Kolkata",
+        review: "Jadavpur University has a rich academic legacy. The cultural fests and technical events are amazing.",
+        // avatar: "https://randomuser.me/api/portraits/women/33.jpg"
+      },
+      {
+        name: "Rohan Desai",
+        college: "IIT Madras",
+        status: "Alumnus",
+        role: "Software Developer at Meta",
+        location: "Chennai",
+        review: "IIT Madras has a perfect blend of academics and extracurriculars. The campus is beautiful and inspiring.",
+        // avatar: "https://randomuser.me/api/portraits/men/88.jpg"
+      },
+      {
+        name: "Meera Nair",
+        college: "Anna University",
+        status: "Current Student",
+        role: "Mechanical Engineering Student",
+        location: "Chennai",
+        review: "Anna University offers strong technical education and great industry connections.",
+        // avatar: "https://randomuser.me/api/portraits/women/55.jpg"
+      },
+      // Generate 240 more alumni
+      ...Array.from({ length: 240 }, (_, i) => {
+        const college = colleges[Math.floor(Math.random() * colleges.length)];
+        const locations = [
+          "Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Pune",
+          "Ahmedabad", "Jaipur", "Lucknow", "Visakhapatnam", "Vijayawada", "Tirupati",
+          "Guntur", "Warangal", "Mysore", "Mangalore", "Hubli"
+        ];
+        const statuses = ["Alumnus", "Current Student"];
+        const roles = [
+          "Software Engineer", "Data Analyst", "Consultant", "Researcher", "Product Manager",
+          "Cybersecurity Analyst", "Mechanical Engineer", "Biotechnologist", "Medical Student",
+          "Engineering Student", "MBA Student", "Computer Science Student"
+        ];
+        const reviews = [
+          "The college provided an excellent learning environment with supportive faculty.",
+          "Campus life is vibrant with numerous opportunities for growth.",
+          "The curriculum is rigorous and prepares you well for the industry.",
+          "Great placement opportunities and a strong alumni network.",
+          "The technical clubs and events are a highlight of the college experience.",
+          "World-class facilities and a dynamic campus atmosphere.",
+          "The faculty mentorship was key to my academic and professional success.",
+          "A perfect blend of academics and extracurricular activities."
+        ];
+        return {
+          name: `Alumnus ${i + 11}`,
+          college,
+          status: statuses[Math.floor(Math.random() * statuses.length)],
+          role: roles[i % roles.length],
+          location: locations[i % locations.length],
+          review: reviews[i % reviews.length],
+          // avatar: `https://randomuser.me/api/portraits/${i % 2 === 0 ? "men" : "women"}/${(i % 50) + 20}.jpg`
+        };
+      })
+    ];
+
+    // Filter and pagination logic
+    let currentPage = 1;
+    const alumniPerPage = 9;
+    let activeFilters = {
+      college: "",
+      location: ""
+    };
+
+    function renderAlumni(filteredAlumni, page) {
+      const start = (page - 1) * alumniPerPage;
+      const end = start + alumniPerPage;
+      const paginatedAlumni = filteredAlumni.slice(start, end);
+
+      const alumniGrid = document.getElementById("alumni-grid");
+      if (paginatedAlumni.length === 0) {
+        alumniGrid.innerHTML = '<div class="no-alumni">No alumni match the selected filters.</div>';
+      } else {
+        alumniGrid.innerHTML = paginatedAlumni.map(alumnus => `
+          <div class="alumni-card">
+            <div class="alumni-avatar">
+              <img src="${alumnus.avatar}" alt="${alumnus.name}">
+              <div class="alumni-status">${alumnus.status}</div>
+            </div>
+            <div class="alumni-info">
+              <h3>${alumnus.name}</h3>
+              <p class="alumni-college">${alumnus.college}</p>
+              <p class="alumni-role">${alumnus.role}</p>
+              <p class="alumni-location"><i class="fas fa-map-marker-alt"></i> ${alumnus.location}</p>
+              <p class="alumni-review">"${alumnus.review}"</p>
+              <a href="#" class="btn btn-primary btn-sm">Read Full Review</a>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      // Update pagination
+      const totalPages = Math.ceil(filteredAlumni.length / alumniPerPage);
+      document.getElementById("prev-page").disabled = page === 1;
+      document.getElementById("next-page").disabled = page === totalPages || filteredAlumni.length === 0;
+    }
+
+    function applyFilters() {
+      let filteredAlumni = alumni.filter(alumnus => {
+        return (
+          (!activeFilters.college || alumnus.college === activeFilters.college) &&
+          (!activeFilters.location || alumnus.location === activeFilters.location)
+        );
+      });
+
+      // Sort alumni by matching filters (more matches = higher rank)
+      filteredAlumni = filteredAlumni.sort((a, b) => {
+        let scoreA = 0;
+        let scoreB = 0;
+
+        if (activeFilters.college && a.college === activeFilters.college) scoreA++;
+        if (activeFilters.college && b.college === activeFilters.college) scoreB++;
+        if (activeFilters.location && a.location === activeFilters.location) scoreA++;
+        if (activeFilters.location && b.location === activeFilters.location) scoreB++;
+
+        return scoreB - scoreA;
+      });
+
+      currentPage = 1;
+      renderAlumni(filteredAlumni, currentPage);
+      renderFilterTags();
+    }
+
+    function renderFilterTags() {
+      const filterTags = document.getElementById("filter-tags");
+      filterTags.innerHTML = "";
+
+      Object.entries(activeFilters).forEach(([key, value]) => {
+        if (value) {
+          const tag = document.createElement("div");
+          tag.className = "filter-tag";
+          tag.innerHTML = `
+            ${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}
+            <button class="remove-tag" data-filter="${key}"><i class="fas fa-times"></i></button>
+          `;
+          filterTags.appendChild(tag);
+        }
+      });
+
+      // Add event listeners to remove tags
+      document.querySelectorAll(".remove-tag").forEach(button => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+          activeFilters[filter] = "";
+          document.getElementById(filter).value = "";
+          applyFilters();
+        });
+      });
+    }
+
+    // Event listeners for filters
+    document.getElementById("college").addEventListener("change", e => {
+      activeFilters.college = e.target.value;
+      applyFilters();
+    });
+
+    document.getElementById("location").addEventListener("change", e => {
+      activeFilters.location = e.target.value;
+      applyFilters();
+    });
+
+    document.querySelector(".clear-filters").addEventListener("click", () => {
+      activeFilters = {
+        college: "",
+        location: ""
+      };
+      document.getElementById("college").value = "";
+      document.getElementById("location").value = "";
+      applyFilters();
+    });
+
+    // Pagination controls
+    document.getElementById("prev-page").addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        applyFilters();
+      }
+    });
+
+    document.getElementById("next-page").addEventListener("click", () => {
+      const totalPages = Math.ceil(alumni.filter(alumnus => {
+        return (
+          (!activeFilters.college || alumnus.college === activeFilters.college) &&
+          (!activeFilters.location || alumnus.location === activeFilters.location)
+        );
+      }).length / alumniPerPage);
+
+      if (currentPage < totalPages) {
+        currentPage++;
+        applyFilters();
+      }
+    });
+
+    // Initial render
+    applyFilters();
+
+    // Navbar and mobile menu functionality
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobileMenu = document.querySelector(".mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+        menuToggle.classList.toggle("active");
+      });
+
+      // Scroll effects
+      const navbar = document.querySelector(".navbar");
+      const backToTop = document.querySelector(".back-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          navbar.classList.add("scrolled");
+          backToTop.classList.add("active");
+        } else {
+          navbar.classList.remove("scrolled");
+          backToTop.classList.remove("active");
+        }
+      });
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>

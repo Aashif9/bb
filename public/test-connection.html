@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Connection Test</title>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .loading {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Supabase Database Connection Test</h1>
+        <p>This page tests the connection to your Supabase database.</p>
+        
+        <div id="status" class="status loading">Initializing...</div>
+        
+        <button onclick="testConnection()">Test Connection</button>
+        <button onclick="testAuth()">Test Authentication</button>
+        <button onclick="clearOutput()">Clear Output</button>
+        
+        <div id="output"></div>
+    </div>
+
+    <script src="supabase-config.js"></script>
+    <script>
+        function log(message) {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.textContent += `[${timestamp}] ${message}\n`;
+        }
+
+        function updateStatus(message, type = 'loading') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+        }
+
+        function clearOutput() {
+            document.getElementById('output').textContent = '';
+        }
+
+        async function testConnection() {
+            updateStatus('Testing connection...', 'loading');
+            log('Starting connection test...');
+            
+            try {
+                // Wait for database manager to be available
+                if (!window.db) {
+                    log('Waiting for database manager...');
+                    await new Promise(resolve => {
+                        const checkDb = setInterval(() => {
+                            if (window.db) {
+                                clearInterval(checkDb);
+                                resolve();
+                            }
+                        }, 100);
+                    });
+                }
+                
+                log('Database manager loaded successfully');
+                
+                // Test basic connection
+                const result = await window.db.testConnection();
+                
+                if (result.success) {
+                    updateStatus('✅ Connection successful!', 'success');
+                    log('Connection test passed: ' + result.message);
+                } else {
+                    updateStatus('❌ Connection failed', 'error');
+                    log('Connection test failed: ' + result.error);
+                }
+                
+            } catch (error) {
+                updateStatus('❌ Connection error', 'error');
+                log('Connection error: ' + error.message);
+            }
+        }
+
+        async function testAuth() {
+            updateStatus('Testing authentication...', 'loading');
+            log('Starting authentication test...');
+            
+            try {
+                if (!window.db) {
+                    log('Database manager not available');
+                    updateStatus('❌ Database manager not loaded', 'error');
+                    return;
+                }
+                
+                // Test getting current user (should be null if not logged in)
+                const user = await window.db.getCurrentUser();
+                
+                if (user) {
+                    updateStatus('✅ User is logged in', 'success');
+                    log('Current user: ' + JSON.stringify(user, null, 2));
+                } else {
+                    updateStatus('ℹ️ No user logged in (this is normal)', 'success');
+                    log('No user currently logged in - authentication system is working');
+                }
+                
+            } catch (error) {
+                updateStatus('❌ Authentication test failed', 'error');
+                log('Authentication error: ' + error.message);
+            }
+        }
+
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                log('Page loaded, starting automatic tests...');
+                testConnection();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
